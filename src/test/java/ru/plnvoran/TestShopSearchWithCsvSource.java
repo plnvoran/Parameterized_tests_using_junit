@@ -18,12 +18,12 @@ public class TestShopSearchWithCsvSource extends TestBase {
         @ParameterizedTest(name = "Для часового брэнда по запросу {0} найден магазин {1} в списке ")
         @DisplayName("Тест для проверки нахождения магазина в списке всех найденных магазинов по запросу")
         @Tags({@Tag("CRITICAL"), @Tag("SEARCH"), @Tag("VOCABULARY")})
-        void searchShopByBrandWithCsvSource(String brand, String service) {
+        void searchShopByBrandWithCsvSource(String brand, String shop) {
         open("https://skytime.ru/trade-point");
 
         $("#points-filter-form").$(byText(brand)).click();
         $(byClassName("points-sidebar__button")).click();
-        $$(".points-sidebar__point-header").findBy(text(service));
+        $$(".points-sidebar__point-header").findBy(text(shop));
 
     }
 

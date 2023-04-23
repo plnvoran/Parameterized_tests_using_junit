@@ -23,8 +23,8 @@ public class TestArtistSearchWithMethodSource extends TestBase {
   }
 
   @MethodSource
-  @ParameterizedTest(name = "Для часового брэнда по запросу {0} найден магазин {1} в списке ")
-  @DisplayName("Тест для проверки нахождения магазина в списке всех найденных магазинов по запросу")
+  @ParameterizedTest(name = "Для артиста по запросу {0} найдены дата рождения {1} и дата смерти {2}")
+  @DisplayName("Тест для проверки соответствия дат жизни артиста на сайте Wikipedia эталонным датам")
   @Tags({@Tag("CRITICAL"), @Tag("SEARCH"), @Tag("ARTISTS")})
     void artistSearchMethodSource(List<String> info) {
 

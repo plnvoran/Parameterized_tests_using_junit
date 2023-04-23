@@ -17,23 +17,24 @@ public class TestArtistSearchWithMethodSource extends TestBase {
 
   static Stream<Arguments> artistSearchMethodSource() {
     return Stream.of(
-            Arguments.of( List.of("David Bowie", "8 January 1947", "10 January 2016")),
-            Arguments.of( List.of("John Lennon", "9 October 1940", "8 December 1980"))
+            Arguments.of( "David Bowie", List.of("8 January 1947", "10 January 2016")),
+            Arguments.of( "John Lennon", List.of("9 October 1940", "8 December 1980"))
     );
+
   }
 
   @MethodSource
-  @ParameterizedTest(name = "Для артиста по запросу {0} найдены дата рождения {1} и дата смерти {2}")
+  @ParameterizedTest(name = "Для артиста {0} даты жизни {1} успешно сверены с сайтом Wikipedia")
   @DisplayName("Тест для проверки соответствия дат жизни артиста на сайте Wikipedia эталонным датам")
   @Tags({@Tag("CRITICAL"), @Tag("SEARCH"), @Tag("ARTISTS")})
-    void artistSearchMethodSource(List<String> info) {
+    void artistSearchMethodSource(String artist, List<String> dates) {
 
       open("https://en.wikipedia.org/wiki/Main_Page");
-      $("#searchform [title='Search Wikipedia [alt-shift-f]']").setValue(info.get(0));;
+      $("#searchform [title='Search Wikipedia [alt-shift-f]']").setValue(artist);;
       $("#searchform button").click();
 
-      $$(".infobox-label").findBy(text("Born")).parent().shouldHave(text(info.get(1)));
-      $$(".infobox-label").findBy(text("Died")).parent().shouldHave(text(info.get(2)));
+      $$(".infobox-label").findBy(text("Born")).parent().shouldHave(text(dates.get(0)));
+      $$(".infobox-label").findBy(text("Died")).parent().shouldHave(text(dates.get(1)));
 
     }
 
